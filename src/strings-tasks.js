@@ -152,8 +152,12 @@ function repeatString(str, times) {
  *   removeFirstOccurrences('I like legends', 'end') => 'I like legs'.
  *   removeFirstOccurrences('ABABAB', 'BA') => 'ABAB'.
  */
-function removeFirstOccurrences(/* str, value */) {
-  throw new Error('Not implemented');
+function removeFirstOccurrences(str, value) {
+  const first = str.indexOf(value);
+  if (first === -1) {
+    return str;
+  }
+  return str.slice(0, first) + str.slice(first + value.length);
 }
 
 /**
@@ -168,8 +172,12 @@ function removeFirstOccurrences(/* str, value */) {
  *   removeLastOccurrences('I like legends', 'end') => 'I like legs'.
  *   removeLastOccurrences('ABABAB', 'BA') => 'ABAB'.
  */
-function removeLastOccurrences(/* str, value */) {
-  throw new Error('Not implemented');
+function removeLastOccurrences(str, value) {
+  const last = str.lastIndexOf(value);
+  if (last === -1) {
+    return str;
+  }
+  return str.slice(0, last) + str.slice(last + value.length);
 }
 
 /**
@@ -184,8 +192,15 @@ function removeLastOccurrences(/* str, value */) {
  *   sumOfCodes('') => 0
  *   sumOfCodes() => 0
  */
-function sumOfCodes(/* str */) {
-  throw new Error('Not implemented');
+function sumOfCodes(str) {
+  if (typeof str !== 'string') {
+    return 0;
+  }
+  let sum = 0;
+  for (let i = 0; i < str.length; i += 1) {
+    sum += str.charCodeAt(i);
+  }
+  return sum;
 }
 
 /**
@@ -199,8 +214,8 @@ function sumOfCodes(/* str */) {
  *   startsWith('Hello World', 'World') => false
  *   startsWith('Hello World', 'Hello') => true
  */
-function startsWith(/* str, substr */) {
-  throw new Error('Not implemented');
+function startsWith(str, substr) {
+  return str.startsWith(substr);
 }
 
 /**
@@ -214,8 +229,8 @@ function startsWith(/* str, substr */) {
  *   endsWith('Hello World', 'World') => true
  *   endsWith('Hello World', 'Hello') => false
  */
-function endsWith(/* str, substr */) {
-  throw new Error('Not implemented');
+function endsWith(str, substr) {
+  return str.endsWith(substr);
 }
 
 /**
@@ -231,8 +246,10 @@ function endsWith(/* str, substr */) {
  *   formatTime(0, 45) => "00:45"
  *   formatTime(0, 0) => "00:00"
  */
-function formatTime(/* minutes, seconds */) {
-  throw new Error('Not implemented');
+function formatTime(minutes, seconds) {
+  const m = minutes.toString().padStart(2, '0');
+  const s = seconds.toString().padStart(2, '0');
+  return `${m}:${s}`;
 }
 
 /**
@@ -264,8 +281,8 @@ function reverseString(str) {
  *   orderAlphabetically('textbook') => 'bekoottx'
  *   orderAlphabetically('abc123xyz') => '123abcxyz'
  */
-function orderAlphabetically(/* str */) {
-  throw new Error('Not implemented');
+function orderAlphabetically(str) {
+  return str.split('').sort().join('');
 }
 
 /**
@@ -280,8 +297,8 @@ function orderAlphabetically(/* str */) {
  *   containsSubstring('JavaScript is Fun', 'Python') => false
  *   containsSubstring('12345', '34') => true
  */
-function containsSubstring(/* str, substring */) {
-  throw new Error('Not implemented');
+function containsSubstring(str, substring) {
+  return str.includes(substring);
 }
 
 /**
@@ -298,8 +315,28 @@ function containsSubstring(/* str, substring */) {
  *   countVowels('aEiOu') => 5
  *   countVowels('XYZ') => 1
  */
-function countVowels(/* str */) {
-  throw new Error('Not implemented');
+function countVowels(str) {
+  let result = 0;
+  for (let i = 0; i < str.length; i += 1) {
+    if (
+      str[i] === 'a' ||
+      str[i] === 'e' ||
+      str[i] === 'i' ||
+      str[i] === 'o' ||
+      str[i] === 'u' ||
+      str[i] === 'y' ||
+      str[i] === 'A' ||
+      str[i] === 'E' ||
+      str[i] === 'I' ||
+      str[i] === 'O' ||
+      str[i] === 'U' ||
+      str[i] === 'Y'
+    ) {
+      result += 1;
+    }
+    result += 0;
+  }
+  return result;
 }
 
 /**
@@ -336,8 +373,15 @@ function isPalindrome(str) {
  *   findLongestWord('A long and winding road') => 'winding'
  *   findLongestWord('No words here') => 'words'
  */
-function findLongestWord(/* sentence */) {
-  throw new Error('Not implemented');
+function findLongestWord(sentence) {
+  const arrSentence = sentence.split(' ');
+  let longest = '';
+  for (let i = 0; i < arrSentence.length; i += 1) {
+    if (arrSentence[i].length > longest.length) {
+      longest = arrSentence[i];
+    }
+  }
+  return longest;
 }
 
 /**
@@ -367,8 +411,16 @@ function reverseWords(str) {
  *   invertCase('JavaScript is Fun') => 'jAVAsCRIPT IS fUN'
  *   invertCase('12345') => '12345'
  */
-function invertCase(/* str */) {
-  throw new Error('Not implemented');
+function invertCase(str) {
+  let result = '';
+  for (let i = 0; i < str.length; i += 1) {
+    if (str[i] === str[i].toUpperCase()) {
+      result += str[i].toLowerCase();
+    } else {
+      result += str[i].toUpperCase();
+    }
+  }
+  return result;
 }
 
 /**
@@ -398,8 +450,8 @@ function getStringFromTemplate(firstName, lastName) {
  *   extractNameFromTemplate('Hello, John Doe!') => 'John Doe'
  *   extractNameFromTemplate('Hello, Chuck Norris!') => 'Chuck Norris'
  */
-function extractNameFromTemplate(/* value */) {
-  throw new Error('Not implemented');
+function extractNameFromTemplate(value) {
+  return value.slice(7, -1);
 }
 
 /**
@@ -432,8 +484,8 @@ function unbracketTag(str) {
  *   ],
  *   'info@gmail.com' => ['info@gmail.com']
  */
-function extractEmails(/* str */) {
-  throw new Error('Not implemented');
+function extractEmails(str) {
+  return str.split(';');
 }
 
 /**
@@ -452,8 +504,19 @@ function extractEmails(/* str */) {
  *    => 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm'
  *
  */
-function encodeToRot13(/* str */) {
-  throw new Error('Not implemented');
+function encodeToRot13(str) {
+  const inin = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+  const out = 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm';
+  let result = '';
+  for (let i = 0; i < str.length; i += 1) {
+    const ii = inin.indexOf(str[i]);
+    if (ii === -1) {
+      result += str[i];
+    } else {
+      result += out[ii];
+    }
+  }
+  return result;
 }
 
 /**
@@ -480,8 +543,28 @@ function encodeToRot13(/* str */) {
  *   'Q♠' => 50
  *   'K♠' => 51
  */
-function getCardId(/* value */) {
-  throw new Error('Not implemented');
+function getCardId(value) {
+  const ranks = [
+    'A',
+    '2',
+    '3',
+    '4',
+    '5',
+    '6',
+    '7',
+    '8',
+    '9',
+    '10',
+    'J',
+    'Q',
+    'K',
+  ];
+  const suits = ['♣', '♦', '♥', '♠'];
+  const rank = value.slice(0, value.length - 1);
+  const suit = value.slice(-1);
+  const rankIndex = ranks.indexOf(rank);
+  const suitIndex = suits.indexOf(suit);
+  return suitIndex * ranks.length + rankIndex;
 }
 
 module.exports = {
